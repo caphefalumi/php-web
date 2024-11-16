@@ -5,10 +5,10 @@ include 'header.inc'; // Include the header
 include 'menu.inc';   // Include the menu
 ?>
 
-<form id = "apply-form" method="POST" action = "apply.php" novalidate="novalidate">
+<form id = "apply-form" method="POST" action = "processEOI.php" novalidate="novalidate">
     <fieldset class="JobID" >
       <legend>Job</legend>
-      <label for="JobID"> Application for * <input type="text" id="JobID" pattern="\d{5}" maxlength="5" required > </label>
+      <label for="JobID"> Application for * <input type="text" name="JobID" id="JobID" pattern="\d{5}" maxlength="5" required > </label>
     </fieldset>
     <fieldset>
       <legend>Personal data</legend>
@@ -95,4 +95,6 @@ include 'menu.inc';   // Include the menu
       
     </section>
   </form>
-<?php include 'footer.inc'; // Include the footer ?>
+  </body>
+</html>
+

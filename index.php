@@ -1,3 +1,4 @@
+<?php
 $title = "Home";
 include 'header.inc'; // Include the header
 include 'menu.inc';   // Include the menu

@@ -1,4 +1,4 @@
-<header>
+<header class="main">
     <ul>
         <li><a href="index.php">Home</a></li>
         <li><a href="jobs.php">Jobs</a></li>
