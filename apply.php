@@ -5,7 +5,7 @@ include 'header.inc'; // Include the header
 include 'menu.inc';   // Include the menu
 ?>
 
-<form id = "apply-form" method="POST" action = "https://mercury.swin.edu.au/it000000/formtest.php" novalidate="novalidate">
+<form id = "apply-form" method="POST" action = "apply.php" novalidate="novalidate">
     <fieldset class="JobID" >
       <legend>Job</legend>
       <label for="JobID"> Application for * <input type="text" id="JobID" pattern="\d{5}" maxlength="5" required > </label>
