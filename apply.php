@@ -1,23 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png" >
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <title>Application Form</title>
-</head>
+<?php
+// Set the page title
+$title = "Application Form";
+include 'header.inc'; // Include the header
+include 'menu.inc';   // Include the menu
+?>
 
-<header>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="apply.html">Apply</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="enhancements.html">Enhancements</a></li>
-    </ul>
-</header>
-
-<form id = "apply-form" method="POST" action = "https://mercury.swin.edu.au/it000000/formtest.php">
+<form id = "apply-form" method="POST" action = "https://mercury.swin.edu.au/it000000/formtest.php" novalidate="novalidate">
     <fieldset class="JobID" >
       <legend>Job</legend>
       <label for="JobID"> Application for * <input type="text" id="JobID" pattern="\d{5}" maxlength="5" required > </label>
@@ -107,3 +95,4 @@
       
     </section>
   </form>
+<?php include 'footer.inc'; // Include the footer ?>
