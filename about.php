@@ -3,7 +3,7 @@
 $title = "Group Information";
 include 'header.inc'; // Include the header
 include 'menu.inc';   // Include the menu
-?>
+?> sa
 
 <body class="about">
     <section class="about_title">
