@@ -9,14 +9,14 @@ $conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-$result = $conn->query($query);
+$result = $conn->query("SELECT * FROM eoi");
 if (!$result) die($conn->error);
 echo "<table border='1'><tr><th>Job ID</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Date of Birth</th><th>Address</th><th>Town</th><th>Postcode</th><th>State</th></tr>";
 while ($row = $result->fetch_assoc()) {
     echo "<tr>
-    <td>" . $row["JobID"] . "</td>
-    <td>" . $row["firstname"] . "</td>
-    <td>" . $row["familyname"] . "</td>
+    <td>" . $row["job_reference"] . "</td>
+    <td>" . $row["first_name"] . "</td>
+    <td>" . $row["last_name"] . "</td>
     <td>" . $row["genders"] . "</td>
     <td>" . $row["dob"] . "</td>
     <td>" . $row["address"] . "</td>
