@@ -8,7 +8,7 @@ include 'menu.inc';   // Include the menu
 <body class="about">
     <section class="about_title">
         <h1>Group Information</h1>
-
+    
         <!-- Definition List -->
         <dl>
             <dt>Group Name:</dt>
