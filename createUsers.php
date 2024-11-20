@@ -20,9 +20,8 @@ if ($password != $confirmPassword) {
     header("Location: login.php?error=passwords_do_not_match");
     exit();  // Make sure to stop script execution after redirection
 }
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);  // Hash the password
 
-$conn->query("INSERT INTO users (userName, password) VALUES ('$userName', '$hasedPassword')");
+$conn->query("INSERT INTO users (userName, password) VALUES ('$userName', '$password')");
 header("Location: login.php");
 exit();
 ?>

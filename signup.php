@@ -16,7 +16,7 @@ if (isset($_GET['error'])) {
     <h2>Login</h2>
     <form action="createUsers.php" method="POST">
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
+        <input type="text" id="userName" name="userName" required><br><br>
 
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br><br>

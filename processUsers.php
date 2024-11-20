@@ -14,11 +14,11 @@ $sql = "SELECT * FROM users WHERE userName = '$userName' AND password = '$passwo
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
-    if (password_verify($password, $user['password'])) {
+    if ($password == $user['password']) {
         // Password is correct, login the user
         session_start();
         $_SESSION['userName'] = $user['userName'];
-        header("Location: welcome.php");
+        header("Location: index.php");
         exit();
     } else {
         // Incorrect password
