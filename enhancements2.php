@@ -1,5 +1,5 @@
 <?php
-$title = "Enhancements 1";
+$title = "Enhancements 2 ";
 include 'header.inc'; // Include the header
 include 'menu.inc';   // Include the menu
 ?>
@@ -8,7 +8,7 @@ include 'menu.inc';   // Include the menu
     <section class="enhance">
         <h1>Enhancements</h1>
         <ol>
-            <li><strong>Designing a navigation bar</strong>
+            <li><strong>Making login form to be more secure </strong>
                 <p>We have made<a href="example.html" class="example">a new navigation bar </a> which looks more professional than the<a class="old-example" href="old_example.html">links menu we were given in labs</a></p>
             </li>
             <li><strong>Creating a keep-updated aside</strong>
