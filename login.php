@@ -1,23 +1,38 @@
 <?php
-include 'header.inc';
-include 'menu.inc';
-// Check if there's an error message from the authentication process
+// Set the page title
+$title = "Login";
+include 'header.inc'; // Include the header
+include 'menu.inc';   // Include the menu
+include 'settings.php'; // Include the settings file
+$conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+// Check if the form was submitted
+    // Initialize variables
+$message = "";
 
+    // Check if the form was submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Get username and password from POST data
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        $user = mysqli_query($conn, $sql);
+        // Verify the username and password
+        if ($user && mysqli_num_rows($user) == 1) {
+            $message = "Login successful!";
+        } else {
+            $message = "Invalid username or password.";
+        }
+    }
 ?>
 <body>
-    <h2>Login</h2>
-    <form action="processUsers.php" method="POST">
-        <label for="userName">Username:</label><br>
-        <input type="text" id="userName" name="userName" required><br><br>
-
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+    <form class="login-form" action="login.php" method="POST">
+        <h2>Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        
         <button type="submit">Login</button>
     </form>
 </body>
-</html>
-<?php 
-if (isset($_GET['error'])) {
-    echo "<p style='color: red;'>".$_GET['error']."</p>";
-}
-?>
