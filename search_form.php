@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Applications</title>
-</head>
+<?php
+include 'header.inc';
+include 'menu.inc';
+?>
 <body>
   <h1>Search Applications</h1>
   <form id="search-apply-form" method="GET" action="manage.php">

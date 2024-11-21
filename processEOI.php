@@ -125,8 +125,10 @@ Other Skills: $otherSkills<br>";
 // $conn->query($sqlCreateTable);
 // $insertTable = "INSERT INTO EOI (jobRef, firstName, lastName, dob, gender, address, town, state, postcode, email, phone, skills, otherSkills) VALUES ($jobRef, $firstName, $lastName, $dob, $gender, $address, $town, $state, $postcode, $email, $phone, $skills, $otherSkills)";
 // Insert validated data into the database
-$conn->query("INSERT INTO eoi (first_name, last_name, postcode) VALUES ('$firstName', '$lastName', '$gender')");
+$conn->query("INSERT INTO eoi (job_reference, first_name, last_name, DOB, gender, email, street_address, surburb, state, phone_number, skill1, skill2, other_skills, status) VALUES ('$jobID','$firstName', '$lastName', '$dob' '$gender', 'New')");
 
 
 $conn->close();
+header("Location: apply.php?=success"); // Redirect to an error page
+
 ?>
