@@ -14,7 +14,7 @@ $sql = "SELECT * FROM users WHERE userName = '$userName' AND password = '$passwo
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
-    if ($password == $user['password']) {
+    if (password_verify($password, $user['password'])) {
         // Password is correct, login the user
         session_start();
         $_SESSION['loggedin'] = true;

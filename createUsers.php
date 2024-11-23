@@ -9,6 +9,7 @@ function sanitize_input($data) {
 }
 $userName = sanitize_input($_POST['userName']);
 $password = sanitize_input($_POST['password']);
+$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 $confirmPassword = sanitize_input($_POST['confirmPassword']);
 $secretKey = sanitize_input($_POST['secretKey']);
 $ssecretKey = 'Y29tcGFueQ==';
@@ -27,7 +28,7 @@ if ($password != $confirmPassword) {
     exit();  // Make sure to stop script execution after redirection
 }
 
-$conn->query("INSERT INTO users (userName, password) VALUES ('$userName', '$password')");
+$conn->query("INSERT INTO users (userName, password) VALUES ('$userName', '$hashedpassword')");
 header("Location: login.php");
 exit();
 ?>
