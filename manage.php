@@ -2,7 +2,6 @@
 include 'settings.php'; // Include the settings file
 include 'header.inc'; // Include the header
 
-session_start();
 if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
   echo "Please log in first to see this page.";
   header("Location: login.php");
@@ -183,6 +182,7 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
     <?php
 
     // Sample logic for fetching and sorting data
+    $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
     $sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'job_reference';
     $sort_direction = (isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC') ? 'DESC' : 'ASC';
     $search_conditions = [];
@@ -222,32 +222,32 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
     }
 
 
-    $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 
-
-
-    $sql = "SELECT * FROM eoi WHERE " . implode(" AND ", $search_conditions) . " ORDER BY $sort_column $sort_direction";
+    $sql = "SELECT * FROM eoi ORDER BY $sort_column $sort_direction";
+    if (count($search_conditions) > 0) {
+      $sql = "SELECT * FROM eoi WHERE " . implode(" AND ", $search_conditions) . " ORDER BY $sort_column $sort_direction";
+    }
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                <td>" . htmlspecialchars($row['job_reference']) . "</td>
-                <td>" . htmlspecialchars($row['first_name']) . "</td>
-                <td>" . htmlspecialchars($row['last_name']) . "</td>
-                <td>" . htmlspecialchars($row['gender']) . "</td>
-                <td>" . htmlspecialchars($row['DOB']) . "</td>
-                <td>" . htmlspecialchars($row['email']) . "</td>
-                <td>" . htmlspecialchars($row['street_address']) . "</td>
-                <td>" . htmlspecialchars($row['suburb']) . "</td>
-                <td>" . htmlspecialchars($row['state']) . "</td>
-                <td>" . htmlspecialchars($row['postcode']) . "</td>
-                <td>" . htmlspecialchars($row['phone_number']) . "</td>
-                <td>" . htmlspecialchars($row['skill1']) . "</td>
-                <td>" . htmlspecialchars($row['skill2']) . "</td>
-                <td>" . htmlspecialchars($row['other_skills']) . "</td>
-                <td>" . htmlspecialchars($row['status']) . "</td>
-            </tr>";
+          echo "<tr>
+              <td>" . htmlspecialchars($row['job_reference']) . "</td>
+              <td>" . htmlspecialchars($row['first_name']) . "</td>
+              <td>" . htmlspecialchars($row['last_name']) . "</td>
+              <td>" . htmlspecialchars($row['gender']) . "</td>
+              <td>" . htmlspecialchars($row['DOB']) . "</td>
+              <td>" . htmlspecialchars($row['email']) . "</td>
+              <td>" . htmlspecialchars($row['street_address']) . "</td>
+              <td>" . htmlspecialchars($row['suburb']) . "</td>
+              <td>" . htmlspecialchars($row['state']) . "</td>
+              <td>" . htmlspecialchars($row['postcode']) . "</td>
+              <td>" . htmlspecialchars($row['phone_number']) . "</td>
+              <td>" . htmlspecialchars($row['skill1']) . "</td>
+              <td>" . htmlspecialchars($row['skill2']) . "</td>
+              <td>" . htmlspecialchars($row['other_skills']) . "</td>
+              <td>" . htmlspecialchars($row['status']) . "</td>
+          </tr>";
         }
     } else {
         echo "<tr><td colspan='15'>No records found.</td></tr>";

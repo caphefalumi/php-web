@@ -7,5 +7,6 @@
         <li><a href="enhancements.php">Enhancements</a></li>\
         <li><a href="manage.php">Manage</a></li>
         <li><a href="phpenhancements.php">PHP Enhancements</a></li>
+        <li><a href="logout.php">Logout</a></li>
     </ul>
 </header>
