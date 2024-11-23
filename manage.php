@@ -18,7 +18,27 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
 //     $sort_direction = ($_GET['sort_direction'] === "DESC") ? "DESC" : "ASC";
 // }
 
-
+// Build the query with sorting
+$sql = "SELECT (job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, phone_number, skill1, skill2, other_skills, status) FROM eoi ";
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+$result = $conn->query($sql);        
+if ($result->num_rows > 0){ 
+    while ($row = $result->fetch_assoc()):
+        echo "<tr>
+                <td>" . htmlspecialchars($row['job_reference']) . "</td>
+                <td>" . htmlspecialchars($row['first_name']) . "</td>
+                <td>" . htmlspecialchars($row['last_name']) . "</td>
+                <td>" . htmlspecialchars($row['gender']) . "</td>
+                <td>" . htmlspecialchars($row['dob']) . "</td>
+                <td>" . htmlspecialchars($row['street_address']) . "</td>
+                <td>" . htmlspecialchars($row['suburb']) . "</td>
+                <td>" . htmlspecialchars($row['postcode']) . "</td>
+                <td>" . htmlspecialchars($row['state']) . "</td>
+            </tr>";
+    endwhile;}
+else {
+    echo "<tr><td colspan='9'>No records found.</td></tr>";
+}
     
 
 ?>
