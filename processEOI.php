@@ -2,7 +2,7 @@
 include 'settings.php';
 // Prevent direct access to the script
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: error.php"); // Redirect to an error page
+    header("Location: index.php"); // Redirect to an error page
     exit;
 }
 

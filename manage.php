@@ -215,6 +215,7 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
                 <td>" . htmlspecialchars($row['first_name']) . "</td>
                 <td>" . htmlspecialchars($row['last_name']) . "</td>
                 <td>" . htmlspecialchars($row['DOB']) . "</td>
+                <td>" . htmlspecialchars($row['age']) . "</td>
                 <td>" . htmlspecialchars($row['gender']) . "</td>
                 <td>" . htmlspecialchars($row['email']) . "</td>
                 <td>" . htmlspecialchars($row['street_address']) . "</td>
