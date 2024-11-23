@@ -32,19 +32,7 @@ $phone = sanitize_input($_POST['Phone_number']);
 $skill1 = $_POST['skills'][0];
 $skill2 = $_POST['skills'][1];
 $otherSkills = sanitize_input($_POST['other_skills']);
-echo "Job ID: $JobID<br>
-First Name: $firstName<br>
-Last Name: $lastName<br>
-Date of Birth: $dob<br>
-Gender: $gender<br>
-Address: $address<br>
-Town: $town<br>
-State: $state<br>
-Postcode: $postcode<br>
-Email: $email<br>
-Phone: $phone<br>
-Skills: $skills<br>
-Other Skills: $otherSkills<br>";
+
 
 // // Array to store error messages
 // $errors = [];
@@ -129,7 +117,7 @@ Other Skills: $otherSkills<br>";
 $conn->query("INSERT INTO eoi (
     job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, postcode, phone_number, skill1, skill2, other_skills, status
 ) VALUES (
-    '$jobID', '$firstName', '$lastName', '$dob', '$gender', '$email', '$streetAddress', '$suburb', '$state', '$postcode', '$phone', '$skill1', '$skill2', '$otherSkills', 'New')");
+    '$JobID', '$firstName', '$lastName', '$dob', '$gender', '$email', '$address', '$town', '$state', '$postcode', '$phone', '$skill1', '$skill2', '$otherSkills', 'New')");
 
 
 $conn->close();

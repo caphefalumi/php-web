@@ -18,27 +18,7 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
 //     $sort_direction = ($_GET['sort_direction'] === "DESC") ? "DESC" : "ASC";
 // }
 
-// Build the query with sorting
-$sql = "SELECT (job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, phone_number, skill1, skill2, other_skills, status) FROM eoi ";
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-$result = $conn->query($sql);        
-if ($result->num_rows > 0){ 
-    while ($row = $result->fetch_assoc()):
-        echo "<tr>
-                <td>" . htmlspecialchars($row['job_reference']) . "</td>
-                <td>" . htmlspecialchars($row['first_name']) . "</td>
-                <td>" . htmlspecialchars($row['last_name']) . "</td>
-                <td>" . htmlspecialchars($row['genders']) . "</td>
-                <td>" . htmlspecialchars($row['dob']) . "</td>
-                <td>" . htmlspecialchars($row['address']) . "</td>
-                <td>" . htmlspecialchars($row['town']) . "</td>
-                <td>" . htmlspecialchars($row['postcode']) . "</td>
-                <td>" . htmlspecialchars($row['state']) . "</td>
-            </tr>";
-    endwhile;}
-else {
-    echo "<tr><td colspan='9'>No records found.</td></tr>";
-}
+
     
 
 ?>
@@ -105,75 +85,148 @@ else {
     </fieldset>
   </form>
   <h1>Sortable Table</h1>
-    <table>
-        <tr>
-            <th>
-                Job ID
-                <div class="sort-buttons">
-                    <a href="?sort_column=job_reference&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=job_reference&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                First Name
-                <div class="sort-buttons">
-                    <a href="?sort_column=first_name&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=first_name&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                Last Name
-                <div class="sort-buttons">
-                    <a href="?sort_column=last_name&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=last_name&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                Gender
-                <div class="sort-buttons">
-                    <a href="?sort_column=genders&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=genders&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                Date of Birth
-                <div class="sort-buttons">
-                    <a href="?sort_column=dob&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=dob&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                Address
-                <div class="sort-buttons">
-                    <a href="?sort_column=address&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=address&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                Town
-                <div class="sort-buttons">
-                    <a href="?sort_column=town&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=town&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                Postcode
-                <div class="sort-buttons">
-                    <a href="?sort_column=postcode&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=postcode&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-            <th>
-                State
-                <div class="sort-buttons">
-                    <a href="?sort_column=state&sort_direction=ASC">↑</a>
-                    <a href="?sort_column=state&sort_direction=DESC">↓</a>
-                </div>
-            </th>
-        </tr>
-
-    </table>
+  <table>
+    <tr>
+        <th>
+            Job ID
+            <div class="sort-buttons">
+                <a href="?sort_column=job_reference&sort_direction=ASC">↑</a>
+                <a href="?sort_column=job_reference&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            First Name
+            <div class="sort-buttons">
+                <a href="?sort_column=first_name&sort_direction=ASC">↑</a>
+                <a href="?sort_column=first_name&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Last Name
+            <div class="sort-buttons">
+                <a href="?sort_column=last_name&sort_direction=ASC">↑</a>
+                <a href="?sort_column=last_name&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Gender
+            <div class="sort-buttons">
+                <a href="?sort_column=gender&sort_direction=ASC">↑</a>
+                <a href="?sort_column=gender&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Date of Birth
+            <div class="sort-buttons">
+                <a href="?sort_column=DOB&sort_direction=ASC">↑</a>
+                <a href="?sort_column=DOB&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Email
+            <div class="sort-buttons">
+                <a href="?sort_column=email&sort_direction=ASC">↑</a>
+                <a href="?sort_column=email&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Street Address
+            <div class="sort-buttons">
+                <a href="?sort_column=street_address&sort_direction=ASC">↑</a>
+                <a href="?sort_column=street_address&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Suburb
+            <div class="sort-buttons">
+                <a href="?sort_column=suburb&sort_direction=ASC">↑</a>
+                <a href="?sort_column=suburb&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            State
+            <div class="sort-buttons">
+                <a href="?sort_column=state&sort_direction=ASC">↑</a>
+                <a href="?sort_column=state&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Postcode
+            <div class="sort-buttons">
+                <a href="?sort_column=postcode&sort_direction=ASC">↑</a>
+                <a href="?sort_column=postcode&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Phone Number
+            <div class="sort-buttons">
+                <a href="?sort_column=phone_number&sort_direction=ASC">↑</a>
+                <a href="?sort_column=phone_number&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Primary Skill
+            <div class="sort-buttons">
+                <a href="?sort_column=skill1&sort_direction=ASC">↑</a>
+                <a href="?sort_column=skill1&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Secondary Skill
+            <div class="sort-buttons">
+                <a href="?sort_column=skill2&sort_direction=ASC">↑</a>
+                <a href="?sort_column=skill2&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Other Skills
+            <div class="sort-buttons">
+                <a href="?sort_column=other_skills&sort_direction=ASC">↑</a>
+                <a href="?sort_column=other_skills&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
+            Status
+            <div class="sort-buttons">
+                <a href="?sort_column=status&sort_direction=ASC">↑</a>
+                <a href="?sort_column=status&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+    </tr>
+    <?php
+    // Sample logic for fetching and sorting data
+    $sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'job_reference';
+    $sort_direction = (isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC') ? 'DESC' : 'ASC';
+    $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+    
+    $sql = "SELECT * FROM eoi ORDER BY $sort_column $sort_direction";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                <td>" . htmlspecialchars($row['job_reference']) . "</td>
+                <td>" . htmlspecialchars($row['first_name']) . "</td>
+                <td>" . htmlspecialchars($row['last_name']) . "</td>
+                <td>" . htmlspecialchars($row['DOB']) . "</td>
+                <td>" . htmlspecialchars($row['gender']) . "</td>
+                <td>" . htmlspecialchars($row['email']) . "</td>
+                <td>" . htmlspecialchars($row['street_address']) . "</td>
+                <td>" . htmlspecialchars($row['suburb']) . "</td>
+                <td>" . htmlspecialchars($row['state']) . "</td>
+                <td>" . htmlspecialchars($row['postcode']) . "</td>
+                <td>" . htmlspecialchars($row['phone_number']) . "</td>
+                <td>" . htmlspecialchars($row['skill1']) . "</td>
+                <td>" . htmlspecialchars($row['skill2']) . "</td>
+                <td>" . htmlspecialchars($row['other_skills']) . "</td>
+                <td>" . htmlspecialchars($row['status']) . "</td>
+            </tr>";
+        }
+    } else {
+        echo "<tr><td colspan='15'>No records found.</td></tr>";
+    }
+    ?>
+</table>
 
 </body>
 </html>
-?>

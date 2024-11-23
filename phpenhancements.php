@@ -9,7 +9,7 @@ include 'menu.inc';   // Include the menu
         <h1>Enhancements</h1>
         <ol>
             <li><strong>Making login form to be more secure </strong>
-                <p>We have made a <a href="login.php" class="login">login form</a> just for managers who have access to the system</p>
+                <p>We have made a <a href="login.php" class="login">login form</a> just for users who have signed up to the system</p>
             </li>
         </ol>
     </section>
