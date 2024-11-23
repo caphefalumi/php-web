@@ -27,13 +27,13 @@ include 'menu.inc';   // Include the menu
             <legend>Gender</legend>
             <p>
                 <label for="male">Male
-                    <input type="radio" name=genders[] id="male" checked required >
+                    <input type="radio" name=gender value="male" id="male" checked required >
                 </label>
                 <label for="female">Female
-                    <input type="radio" id="female" name=genders[]>
+                    <input type="radio" id="female"value="female" name=gender>
                 </label>
                 <label for="others">Others
-                    <input type="radio" id="others" name=genders[]>
+                    <input type="radio" id="others"value="others" name=gender>
                 </label>
             </p>
         </fieldset>

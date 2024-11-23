@@ -22,14 +22,15 @@ $JobID = sanitize_input($_POST['JobID']);
 $firstName = sanitize_input($_POST['first_name']);
 $lastName = sanitize_input($_POST['family_name']);
 $dob = sanitize_input($_POST['DOB']);
-$gender = $_POST['genders'];
+$gender = $_POST['gender'];
 $address = sanitize_input($_POST['Address']);
 $town = sanitize_input($_POST['Town']);
 $state = sanitize_input($_POST['state']);
 $postcode = sanitize_input($_POST['Postcode']);
 $email = sanitize_input($_POST['Email']);
 $phone = sanitize_input($_POST['Phone_number']);
-$skills = $_POST['skills'][0];
+$skill1 = $_POST['skills'][0];
+$skill2 = $_POST['skills'][1];
 $otherSkills = sanitize_input($_POST['other_skills']);
 echo "Job ID: $JobID<br>
 First Name: $firstName<br>
@@ -125,7 +126,10 @@ Other Skills: $otherSkills<br>";
 // $conn->query($sqlCreateTable);
 // $insertTable = "INSERT INTO EOI (jobRef, firstName, lastName, dob, gender, address, town, state, postcode, email, phone, skills, otherSkills) VALUES ($jobRef, $firstName, $lastName, $dob, $gender, $address, $town, $state, $postcode, $email, $phone, $skills, $otherSkills)";
 // Insert validated data into the database
-$conn->query("INSERT INTO eoi (job_reference, first_name, last_name, DOB, gender, email, street_address, surburb, state, phone_number, skill1, skill2, other_skills, status) VALUES ('$jobID','$firstName', '$lastName', '$dob' '$gender', 'New')");
+$conn->query("INSERT INTO eoi (
+    job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, postcode, phone_number, skill1, skill2, other_skills, status
+) VALUES (
+    '$jobID', '$firstName', '$lastName', '$dob', '$gender', '$email', '$streetAddress', '$suburb', '$state', '$postcode', '$phone', '$skill1', '$skill2', '$otherSkills', 'New')");
 
 
 $conn->close();

@@ -1,28 +1,46 @@
 <?php
 include 'settings.php'; // Include the settings file
 include 'header.inc'; // Include the header
-$sort_column = "job_reference"; // Default column to sort
-$sort_direction = "ASC"; // Default direction
-// Update sorting based on user request
-if (isset($_GET['sort_column']) && isset($_GET['sort_direction'])) {
-    $allowed_columns = ['job_reference', 'first_name', 'last_name', 'genders', 'dob', 'address', 'town', 'postcode', 'state'];
-    if (in_array($_GET['sort_column'], $allowed_columns)) {
-        $sort_column = $_GET['sort_column'];
-    }
-    $sort_direction = ($_GET['sort_direction'] === "DESC") ? "DESC" : "ASC";
-}
 
 session_start();
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-  echo "Welcome to the member's area, " . htmlspecialchars($_SESSION['username']) . "!";
-} else {
+if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
   echo "Please log in first to see this page.";
   header("Location: login.php");
 }
+// $sort_column = "job_reference"; // Default column to sort
+// $sort_direction = "ASC"; // Default direction
+// // Update sorting based on user request
+// if (isset($_GET['sort_column']) && isset($_GET['sort_direction'])) {
+//     $allowed_columns = ['job_reference', 'first_name', 'last_name', 'genders', 'dob', 'address', 'town', 'postcode', 'state'];
+//     if (in_array($_GET['sort_column'], $allowed_columns)) {
+//         $sort_column = $_GET['sort_column'];
+//     }
+//     $sort_direction = ($_GET['sort_direction'] === "DESC") ? "DESC" : "ASC";
+// }
+
 // Build the query with sorting
-$sql = "SELECT job_reference, first_name, last_name, genders, dob, address, town, postcode, state 
-        FROM eoi 
-        ORDER BY $sort_column $sort_direction";
+$sql = "SELECT (job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, phone_number, skill1, skill2, other_skills, status) FROM eoi ";
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+$result = $conn->query($sql);        
+if ($result->num_rows > 0){ 
+    while ($row = $result->fetch_assoc()):
+        echo "<tr>
+                <td>" . htmlspecialchars($row['job_reference']) . "</td>
+                <td>" . htmlspecialchars($row['first_name']) . "</td>
+                <td>" . htmlspecialchars($row['last_name']) . "</td>
+                <td>" . htmlspecialchars($row['genders']) . "</td>
+                <td>" . htmlspecialchars($row['dob']) . "</td>
+                <td>" . htmlspecialchars($row['address']) . "</td>
+                <td>" . htmlspecialchars($row['town']) . "</td>
+                <td>" . htmlspecialchars($row['postcode']) . "</td>
+                <td>" . htmlspecialchars($row['state']) . "</td>
+            </tr>";
+    endwhile;}
+else {
+    echo "<tr><td colspan='9'>No records found.</td></tr>";
+}
+    
+
 ?>
 <body>
   <h1>Search Applications</h1>
@@ -153,28 +171,9 @@ $sql = "SELECT job_reference, first_name, last_name, genders, dob, address, town
                 </div>
             </th>
         </tr>
-        <?php if ($result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['job_reference']); ?></td>
-                    <td><?php echo htmlspecialchars($row['first_name']); ?></td>
-                    <td><?php echo htmlspecialchars($row['last_name']); ?></td>
-                    <td><?php echo htmlspecialchars($row['genders']); ?></td>
-                    <td><?php echo htmlspecialchars($row['dob']); ?></td>
-                    <td><?php echo htmlspecialchars($row['address']); ?></td>
-                    <td><?php echo htmlspecialchars($row['town']); ?></td>
-                    <td><?php echo htmlspecialchars($row['postcode']); ?></td>
-                    <td><?php echo htmlspecialchars($row['state']); ?></td>
-                </tr>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <tr><td colspan="9">No records found.</td></tr>
-        <?php endif; ?>
+
     </table>
 
-    <?php
-    // Close the database connection
-    mysqli_close($conn);
-    ?>
 </body>
 </html>
+?>
