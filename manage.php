@@ -7,38 +7,9 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
   echo "Please log in first to see this page.";
   header("Location: login.php");
 }
-// $sort_column = "job_reference"; // Default column to sort
-// $sort_direction = "ASC"; // Default direction
-// // Update sorting based on user request
-// if (isset($_GET['sort_column']) && isset($_GET['sort_direction'])) {
-//     $allowed_columns = ['job_reference', 'first_name', 'last_name', 'genders', 'dob', 'address', 'town', 'postcode', 'state'];
-//     if (in_array($_GET['sort_column'], $allowed_columns)) {
-//         $sort_column = $_GET['sort_column'];
-//     }
-//     $sort_direction = ($_GET['sort_direction'] === "DESC") ? "DESC" : "ASC";
-// }
 
-// Build the query with sorting
-$sql = "SELECT (job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, phone_number, skill1, skill2, other_skills, status) FROM eoi ";
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-$result = $conn->query($sql);        
-if ($result->num_rows > 0){ 
-    while ($row = $result->fetch_assoc()):
-        echo "<tr>
-                <td>" . htmlspecialchars($row['job_reference']) . "</td>
-                <td>" . htmlspecialchars($row['first_name']) . "</td>
-                <td>" . htmlspecialchars($row['last_name']) . "</td>
-                <td>" . htmlspecialchars($row['gender']) . "</td>
-                <td>" . htmlspecialchars($row['dob']) . "</td>
-                <td>" . htmlspecialchars($row['street_address']) . "</td>
-                <td>" . htmlspecialchars($row['suburb']) . "</td>
-                <td>" . htmlspecialchars($row['postcode']) . "</td>
-                <td>" . htmlspecialchars($row['state']) . "</td>
-            </tr>";
-    endwhile;}
-else {
-    echo "<tr><td colspan='9'>No records found.</td></tr>";
-}
+
+
     
 
 ?>
@@ -98,7 +69,6 @@ else {
         </select>
       </label>
       <br>
-
 
       <!-- Search Button -->
       <input type="submit" value="Search">
@@ -212,13 +182,29 @@ else {
                 <a href="?sort_column=status&sort_direction=DESC">↓</a>
             </div>
         </th>
+
     </tr>
     <?php
+
     // Sample logic for fetching and sorting data
     $sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'job_reference';
     $sort_direction = (isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC') ? 'DESC' : 'ASC';
-    $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+
     
+    // Update sorting based on user request
+    if (isset($_GET['sort_column']) && isset($_GET['sort_direction'])) {
+        $allowed_columns = ['job_reference', 'first_name', 'last_name', 'genders', 'dob', 'address', 'town', 'postcode', 'state'];
+        if (in_array($_GET['sort_column'], $allowed_columns)) {
+            $sort_column = $_GET['sort_column'];
+        }
+        $sort_direction = ($_GET['sort_direction'] === "DESC") ? "DESC" : "ASC";
+    }
+
+
+    $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+
+
     $sql = "SELECT * FROM eoi ORDER BY $sort_column $sort_direction";
     $result = $conn->query($sql);
     
@@ -247,17 +233,23 @@ else {
     }
     ?>
 </table>
-  <form action="update.php" method="POST">
-    <label for="eoi_num">EOI Number:
-      <input type="text" id="eoi_num" name="eoi_num" placeholder="ID to delete" pattern="\d{5}" maxlength="5">
-    </label>
-    <label for="status">Status:
-      <select name="status" id="status">
-        <option value="New">New</option>
-        <option value="Current">Current</option>
-        <option value="Final">Final</option>
-    </label>
-    <label for="submit"><input type="submit" value="Delete"></label>
-  </form>
+<form action="update.php" method="POST">
+  <fieldset>
+  <label for="delete_eoi">Job ID to delete:
+    <input type="text" id="delete_eoi" name="delete_eoi" placeholder="ID to delete" maxlength="5">
+  </label>
+  <label for="eoi_num">EOI Number:
+    <input type="text" id="eoi_num" name="eoi_num" placeholder="ID to update" maxlength="5">
+  </label>
+  <label for="status">Status:
+    <select name="status" id="status">
+      <option value="New">New</option>
+      <option value="Current">Current</option>
+      <option value="Final">Final</option>
+    </select>
+  </label>
+  <input type="submit" value="Update">
+  </fieldset>
+</form>
 </body>
 </html>

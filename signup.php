@@ -23,6 +23,9 @@ if (isset($_GET['error'])) {
 
         <label for="confirmPassword">Confirm Password:</label><br>
         <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+
+        <label for="secretKey">Enter Secret Key:</label><br>
+        <input type="password" id="secretKey" name="secretKey" required><br><br>
         <button type="submit">Login</button>
     </form>
 </body>

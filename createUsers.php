@@ -10,6 +10,12 @@ function sanitize_input($data) {
 $userName = sanitize_input($_POST['userName']);
 $password = sanitize_input($_POST['password']);
 $confirmPassword = sanitize_input($_POST['confirmPassword']);
+$secretKey = sanitize_input($_POST['secretKey']);
+$ssecretKey = 'Y29tcGFueQ==';
+if ($secretKey != $ssecretKey) {
+    header("Location: login.php?error=unauthorized_access");
+    exit();
+}
 $sql = "SELECT * FROM users WHERE userName = '$userName'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
