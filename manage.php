@@ -8,10 +8,6 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
   header("Location: login.php");
 }
 
-
-
-    
-
 ?>
 <body>
   <h1>Search Applications</h1>
@@ -189,7 +185,32 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
     // Sample logic for fetching and sorting data
     $sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'job_reference';
     $sort_direction = (isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC') ? 'DESC' : 'ASC';
-
+    $search_conditions = [];
+    $job_id = isset($_GET['job_id']) ? trim($_GET['job_id']) : '';
+    $first_name = isset($_GET['first_name']) ? trim($_GET['first_name']) : '';
+    $last_name = isset($_GET['last_name']) ? trim($_GET['last_name']) : '';
+    $gender = isset($_GET['gender']) ? trim($_GET['gender']) : '';
+    $dob = isset($_GET['dob']) ? trim($_GET['dob']) : '';
+    $state = isset($_GET['state']) ? trim($_GET['state']) : '';
+    if ($job_id !== '') {
+      $search_conditions[] = "job_reference = '" . $conn->real_escape_string($job_id) . "'";
+    }
+    if ($first_name !== '') {
+      $search_conditions[] = "first_name LIKE '%" . $conn->real_escape_string($first_name) . "%'";
+    }
+    if ($last_name !== '') {
+      $search_conditions[] = "last_name LIKE '%" . $conn->real_escape_string($last_name) . "%'";
+    }
+    if ($gender !== '') {
+      $search_conditions[] = "gender = '" . $conn->real_escape_string($gender) . "'";
+    }
+    if ($dob !== '') {
+      $search_conditions[] = "DOB = '" . $conn->real_escape_string($dob) . "'";
+    }
+    if ($state !== '') {
+      $search_conditions[] = "state = '" . $conn->real_escape_string($state) . "'";
+    } 
+  
     
     // Update sorting based on user request
     if (isset($_GET['sort_column']) && isset($_GET['sort_direction'])) {
@@ -205,7 +226,7 @@ if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
 
 
 
-    $sql = "SELECT * FROM eoi ORDER BY $sort_column $sort_direction";
+    $sql = "SELECT * FROM eoi WHERE " . implode(" AND ", $search_conditions) . " ORDER BY $sort_column $sort_direction";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
