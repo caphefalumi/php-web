@@ -247,6 +247,17 @@ else {
     }
     ?>
 </table>
-
+  <form action="update.php" method="POST">
+    <label for="eoi_num">EOI Number:
+      <input type="text" id="eoi_num" name="eoi_num" placeholder="ID to delete" pattern="\d{5}" maxlength="5">
+    </label>
+    <label for="status">Status:
+      <select name="status" id="status">
+        <option value="New">New</option>
+        <option value="Current">Current</option>
+        <option value="Final">Final</option>
+    </label>
+    <label for="submit"><input type="submit" value="Delete"></label>
+  </form>
 </body>
 </html>
