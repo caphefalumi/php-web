@@ -17,6 +17,7 @@ if ($result->num_rows > 0) {
     if ($password == $user['password']) {
         // Password is correct, login the user
         session_start();
+        $_SESSION['loggedin'] = true;
         $_SESSION['userName'] = $user['userName'];
         header("Location: index.php");
         exit();
