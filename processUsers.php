@@ -10,7 +10,7 @@ function sanitize_input($data) {
 $userName = sanitize_input($_POST['userName']);
 $password = sanitize_input($_POST['password']);
 
-$sql = "SELECT * FROM users WHERE userName = '$userName' AND password = '$password'";
+$sql = "SELECT * FROM users WHERE userName = '$userName'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
