@@ -110,16 +110,54 @@ $otherSkills = sanitize_input($_POST['other_skills']);
 // }
 
 // // Create EOI table if not exists
-
-// $conn->query($sqlCreateTable);
-// $insertTable = "INSERT INTO EOI (jobRef, firstName, lastName, dob, gender, address, town, state, postcode, email, phone, skills, otherSkills) VALUES ($jobRef, $firstName, $lastName, $dob, $gender, $address, $town, $state, $postcode, $email, $phone, $skills, $otherSkills)";
+$query = "CREATE TABLE IF NOT EXISTS eoi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    job_reference VARCHAR(10) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    DOB DATE NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    street_address VARCHAR(255) NOT NULL,
+    suburb VARCHAR(100) NOT NULL,
+    state ENUM('VIC', 'NSW', 'QLD', 'NT', 'WA', 'SA', 'TAS', 'ACT') NOT NULL,
+    postcode CHAR(4) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    skill1 VARCHAR(50) NOT NULL,
+    skill2 VARCHAR(50) NOT NULL,
+    other_skills TEXT,
+    status ENUM('New', 'In Progress', 'Finalized') NOT NULL
+)";
+$conn->query($query);
+$stmt = $conn->prepare("INSERT INTO eoi (
+    job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, postcode, phone_number, skill1, skill2, other_skills, status
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param(
+    "sssssssssssss",
+    $JobID,
+    $firstName,
+    $lastName,
+    $dob,
+    $gender,
+    $email,
+    $address,
+    $town,
+    $state,
+    $postcode,
+    $phone,
+    $skill1,
+    $skill2,
+    $otherSkills,
+    $status
+);
 // Insert validated data into the database
 $conn->query("INSERT INTO eoi (
     job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, postcode, phone_number, skill1, skill2, other_skills, status
 ) VALUES (
     '$JobID', '$firstName', '$lastName', '$dob', '$gender', '$email', '$address', '$town', '$state', '$postcode', '$phone', '$skill1', '$skill2', '$otherSkills', 'New')");
 
-
+$stmt->execute();
+$stmt->close();
 $conn->close();
 header("Location: apply.php?=success"); // Redirect to an error page
 
