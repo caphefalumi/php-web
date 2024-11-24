@@ -4,7 +4,7 @@ include 'header.inc'; // Include the header
 
 if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
   echo "Please log in first to see this page.";
-  header("Location: login.php");
+  header("Location: signup.php");
 }
 
 ?>
