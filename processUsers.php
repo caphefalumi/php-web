@@ -1,6 +1,11 @@
 <?php
 include 'settings.php';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: index.php"); // Redirect to an error page
+    exit;
+}
 $conn = new mysqli($db_host, $db_user, $db_password, $db_name);//connect to db
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
