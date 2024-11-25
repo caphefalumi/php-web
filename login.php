@@ -4,6 +4,9 @@ include 'header.inc';
 include 'menu.inc';
 // Check if there's an error message from the authentication process
 session_start();
+if ($_SESSION['numberOfLogins'] == -1) {
+    header("Location: index.php");
+  }
 ?>
 <body>
     <h2>Login</h2>

@@ -1,14 +1,14 @@
 <?php
-include 'settings.php'; // Include the settings file
+$title = "Search Applicants";
 include 'header.inc'; // Include the header
-
-if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
+include 'settings.php'; // Include the settings file
+session_start();
+if ($_SESSION['numberOfLogins'] != -1) {
   header("Location: signup.php?error=user_not_logged_in");
 }
-
 ?>
 <body>
-  <h1>Search Applications</h1>
+  <h1>Search Applicants</h1>
   <form id="search-apply-form" method="GET" action="">
     <fieldset>
       <legend>Search Criteria</legend>

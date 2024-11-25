@@ -34,89 +34,89 @@ $skill2 = $_POST['skills'][1];
 $otherSkills = sanitize_input($_POST['other_skills']);
 
 
-// // Array to store error messages
-// $errors = [];
+// Array to store error messages
+$errors = [];
 
-// // Server-side Validation:
+// Server-side Validation:
 
-// // Validate Job Reference Number (exactly 5 digits)
-// if (!preg_match('/^\d{5}$/', $JobID)) {
-//     $errors[] = "Invalid Job Reference Number. It must be exactly 5 digits.";
-// }
+// Validate Job Reference Number (exactly 5 digits)
+if (!preg_match('/^\d{5}$/', $JobID)) {
+    $errors[] = "Invalid Job Reference Number. It must be exactly 5 digits.";
+}
 
-// // Validate First Name and Last Name (max 20 alphabetic characters)
-// if (!preg_match('/^[a-zA-Z]{1,20}$/', $firstName)) {
-//     $errors[] = "Invalid First Name. It should contain only letters (max 20).";
-// }
-// if (!preg_match('/^[a-zA-Z]{1,20}$/', $lastName)) {
-//     $errors[] = "Invalid Last Name. It should contain only letters (max 20).";
-// }
+// Validate First Name and Last Name (max 20 alphabetic characters)
+if (!preg_match('/^[a-zA-Z]{1,20}$/', $firstName)) {
+    $errors[] = "Invalid First Name. It should contain only letters (max 20).";
+}
+if (!preg_match('/^[a-zA-Z]{1,20}$/', $lastName)) {
+    $errors[] = "Invalid Last Name. It should contain only letters (max 20).";
+}
 
-// // Validate Date of Birth (age between 15 and 80 years)
-// if (!empty($dob)) {
-//     $dobTimestamp = strtotime($dob);
-//     $currentDate = date("Y-m-d");
-//     $age = date_diff(date_create($dob), date_create($currentDate))->y;
-//     if ($age < 15 || $age > 80) {
-//         $errors[] = "Age must be between 15 and 80 years.";
-//     }
-// } else {
-//     $errors[] = "Date of Birth is required.";
-// }
+// Validate Date of Birth (age between 15 and 80 years)
+if (!empty($dob)) {
+    $dobTimestamp = strtotime($dob);
+    $currentDate = date("Y-m-d");
+    $age = date_diff(date_create($dob), date_create($currentDate))->y;
+    if ($age < 15 || $age > 80) {
+        $errors[] = "Age must be between 15 and 80 years.";
+    }
+} else {
+    $errors[] = "Date of Birth is required.";
+}
 
-// // Validate Gender (must be selected)
-// if (empty($gender)) {
-//     $errors[] = "Gender is required.";
-// }
+// Validate Gender (must be selected)
+if (empty($gender)) {
+    $errors[] = "Gender is required.";
+}
 
-// // Validate Address and Town (max 40 characters)
-// if (strlen($address) > 40 || strlen($town) > 40) {
-//     $errors[] = "Address and Town should not exceed 40 characters.";
-// }
+// Validate Address and Town (max 40 characters)
+if (strlen($address) > 40 || strlen($town) > 40) {
+    $errors[] = "Address and Town should not exceed 40 characters.";
+}
 
-// // Validate State (must be one of the predefined values)
-// $validStates = ['VIC', 'NSW', 'QLD', 'NT', 'WA', 'SA', 'TAS', 'ACT'];
-// if (!in_array($state, $validStates)) {
-//     $errors[] = "Invalid state selected.";
-// }
+// Validate State (must be one of the predefined values)
+$validStates = ['VIC', 'NSW', 'QLD', 'NT', 'WA', 'SA', 'TAS', 'ACT'];
+if (!in_array($state, $validStates)) {
+    $errors[] = "Invalid state selected.";
+}
 
-// // Validate Postcode (4 digits, matches the state)
-// if (!preg_match('/^\d{4}$/', $postcode)) {
-//     $errors[] = "Postcode must be exactly 4 digits.";
-// }
+// Validate Postcode (4 digits, matches the state)
+if (!preg_match('/^\d{4}$/', $postcode)) {
+    $errors[] = "Postcode must be exactly 4 digits.";
+}
 
-// // Validate Email Format
-// if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//     $errors[] = "Invalid email address.";
-// }
+// Validate Email Format
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Invalid email address.";
+}
 
-// // Validate Phone Number (8 to 12 digits or spaces)
-// if (!preg_match('/^(\d\s?){8,12}$/', $phone)) {
-//     $errors[] = "Phone number must be 8 to 12 digits.";
-// }
+// Validate Phone Number (8 to 12 digits or spaces)
+if (!preg_match('/^(\d\s?){8,12}$/', $phone)) {
+    $errors[] = "Phone number must be 8 to 12 digits.";
+}
 
-// // Validate Skills (at least one checkbox must be selected)
-// if (empty($skills)) {
-//     $errors[] = "Please select at least one skill.";
-// }
+// Validate Skills (at least one checkbox must be selected)
+if (empty($skills)) {
+    $errors[] = "Please select at least one skill.";
+}
 
-// // Display errors if validation fails
-// if (!empty($errors)) {
-//     echo "<h3>There were errors in your submission:</h3>";
-//     foreach ($errors as $error) {
-//         echo "<p>$error</p>";
-//     }
-//     exit;
-// }
+// Display errors if validation fails
+if (!empty($errors)) {
+    echo "<h3>There were errors in your submission:</h3>";
+    foreach ($errors as $error) {
+        echo "<p>$error</p>";
+    }
+    exit;
+}
 
-// // Create EOI table if not exists
+// Create EOI table if not exists
 $query = "CREATE TABLE IF NOT EXISTS eoi (
     id INT AUTO_INCREMENT PRIMARY KEY,
     job_reference VARCHAR(10) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     DOB DATE NOT NULL,
-    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    gender varchar(10) NOT NULL,
     email VARCHAR(100) NOT NULL,
     street_address VARCHAR(255) NOT NULL,
     suburb VARCHAR(100) NOT NULL,
@@ -126,7 +126,7 @@ $query = "CREATE TABLE IF NOT EXISTS eoi (
     skill1 VARCHAR(50) NOT NULL,
     skill2 VARCHAR(50) NOT NULL,
     other_skills TEXT,
-    status ENUM('New', 'In Progress', 'Finalized') NOT NULL
+    status ENUM('New', 'Current', 'Final) NOT NULL
 )";
 $conn->query($query);
 $stmt = $conn->prepare("INSERT INTO eoi (
