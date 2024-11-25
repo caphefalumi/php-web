@@ -258,7 +258,7 @@ if ($_SESSION['numberOfLogins'] != -1) {
     }
     ?>
 </table>
-//update form to update EOI and delete
+<!-- Update form to update EOI and delete-->
 <form action="update.php" method="POST">
   <fieldset>
   <label for="delete_eoi">Job ID to delete:
