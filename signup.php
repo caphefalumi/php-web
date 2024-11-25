@@ -13,7 +13,7 @@ if (isset($_GET['error'])) {
     <title>Login Page</title>
 </head>
 <body>
-    <h2>Login</h2>
+    <h2>Signup</h2>
     <form action="createUsers.php" method="POST">
         <label for="username">Username:</label><br>
         <input type="text" id="userName" name="userName" required><br><br>

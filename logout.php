@@ -6,6 +6,7 @@ if (($_SESSION['loggedin'] == true)) {
     $_SESSION['loggedin'] = false;
     header("Location: login.php");
 }
+header("Location: login.php");
 session_destroy()
 
 ?>
