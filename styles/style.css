@@ -530,8 +530,5 @@ button[type="submit"]{
     height: 80vh;
 }
 .manage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+    padding-top: 5%;
 }

@@ -29,6 +29,7 @@ include 'menu.inc';   // Include the menu
     <ul>
         <li>Official Email: <a href="mailto:Tuyendung@viettel.com.vn">Tuyendung@viettel.com.vn</a></li>
         <li>Hotline: 62935333</li>
+        <li><a href="https://www.youtube.com/watch?v=1-eYv8Mnsgo">Youtube video</a></li>
     </ul>
 </section>
 <?php include 'footer.inc'; // Include the footer ?>

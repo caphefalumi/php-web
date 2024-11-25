@@ -9,10 +9,6 @@ if ($_SESSION['numberOfLogins'] != -1) {
 }
 ?>
 <body class="manage">
-  <br>
-  <br>
-  <br>
-  <br>
   <h1>Search Applicants</h1>
   <form id="search-apply-form" method="GET" action="">
     <fieldset>
