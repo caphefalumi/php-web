@@ -7,6 +7,6 @@ if (($_SESSION['loggedin'] == true)) {
     header("Location: login.php");
 }
 header("Location: login.php");
-session_destroy()
-
+session_unset();
+session_destroy();
 ?>
