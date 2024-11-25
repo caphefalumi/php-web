@@ -92,7 +92,6 @@ include 'menu.inc';   // Include the menu
     </fieldset>
     <section class="btns">
       <input type="submit" value="Submit application">
-      
     </section>
   </form>
   </body>

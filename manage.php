@@ -73,6 +73,13 @@ if ($_SESSION['numberOfLogins'] != -1) {
   <table>
     <tr>
         <th>
+            EOI Number
+            <div class="sort-buttons">
+                <a href="?sort_column=job_reference&sort_direction=ASC">↑</a>
+                <a href="?sort_column=job_reference&sort_direction=DESC">↓</a>
+            </div>
+        </th>
+        <th>
             Job ID
             <div class="sort-buttons">
                 <a href="?sort_column=job_reference&sort_direction=ASC">↑</a>
@@ -192,6 +199,7 @@ if ($_SESSION['numberOfLogins'] != -1) {
     $gender = isset($_GET['gender']) ? trim($_GET['gender']) : '';
     $dob = isset($_GET['dob']) ? trim($_GET['dob']) : '';
     $state = isset($_GET['state']) ? trim($_GET['state']) : '';
+
     if ($job_id !== '') {
       $search_conditions[] = "job_reference = '" . $conn->real_escape_string($job_id) . "'";
     }
@@ -232,6 +240,7 @@ if ($_SESSION['numberOfLogins'] != -1) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           echo "<tr>
+              <td>" . htmlspecialchars($row['EOInumber']) . "</td>
               <td>" . htmlspecialchars($row['job_reference']) . "</td>
               <td>" . htmlspecialchars($row['first_name']) . "</td>
               <td>" . htmlspecialchars($row['last_name']) . "</td>
