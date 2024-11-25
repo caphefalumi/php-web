@@ -1,12 +1,11 @@
 <?php
-$title = "Login Page";
+$title = 'Login Page';
 include 'header.inc';
 include 'menu.inc';
-
 // Check if there's an error message from the authentication process
-
+session_start();
 ?>
-<body >
+<body>
     <h2>Login</h2>
     <form action="processUsers.php" method="POST" class = "login" >
         <fieldset>

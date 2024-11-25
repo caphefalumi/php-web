@@ -9,24 +9,26 @@ function sanitize_input($data) {
 }
 $userName = sanitize_input($_POST['userName']);
 $password = sanitize_input($_POST['password']);
-$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 $confirmPassword = sanitize_input($_POST['confirmPassword']);
+$hashedpassword = hash('sha256', $password);
 $secretKey = sanitize_input($_POST['secretKey']);
 $ssecretKey = 'Y29tcGFueQ==';
-if ($secretKey != $ssecretKey) {
-    header("Location: login.php?error=unauthorized_access");
-    exit();
-}
 $sql = "SELECT * FROM users WHERE userName = '$userName'";
 $result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    header("Location: login.php?error=username_taken");
+if ($secretKey != $ssecretKey) {
+    header("Location: singup?error=unauthorized_access");
     exit();
 }
 if ($password != $confirmPassword) {
-    header("Location: login.php?error=passwords_do_not_match");
+    header("Location: singup?error=passwords_do_not_match");
     exit();  // Make sure to stop script execution after redirection
 }
+
+if ($result->num_rows > 0) {
+    header("Location: singup?error=username_taken");
+    exit();
+}
+
 
 $conn->query("INSERT INTO users (userName, password) VALUES ('$userName', '$hashedpassword')");
 header("Location: login.php");

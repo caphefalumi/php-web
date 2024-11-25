@@ -1,7 +1,8 @@
 <?php
+// Set the page title
 $title = "Signup Page";
-include 'header.inc';
-include 'menu.inc';
+include 'header.inc'; // Include the header
+include 'menu.inc';   // Include the menu
 // Check if there's an error message from the authentication process
 if (isset($_GET['error'])) {
     echo "<p style='color: red;'>".$_GET['error']."</p>";

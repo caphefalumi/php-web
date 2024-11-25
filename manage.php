@@ -3,8 +3,7 @@ include 'settings.php'; // Include the settings file
 include 'header.inc'; // Include the header
 
 if (!(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
-  echo "Please log in first to see this page.";
-  header("Location: signup.php");
+  header("Location: signup.php?error=user_not_logged_in");
 }
 
 ?>
