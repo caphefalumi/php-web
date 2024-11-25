@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
         // Incorrect password
         $_SESSION['numberOfLogins']++;
         $t = $_SESSION['numberOfLogins'];
-        if ($_SESSION['numberOfLogins'] == 3) {
+        if ($_SESSION['numberOfLogins'] >= 3) {
             header("Location: error.php");
             exit();
         }
@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
     $_SESSION['numberOfLogins']++;
     $t = $_SESSION['numberOfLogins'];
     header("Location: login.php?error=$t");
-    if ($_SESSION['numberOfLogins'] == 3) {
+    if ($_SESSION['numberOfLogins'] >= 3) {
         header("Location: error.php");
         exit();
     }
