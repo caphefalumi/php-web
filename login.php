@@ -1,7 +1,8 @@
 <?php
+$title = "Login Page";
 include 'header.inc';
 include 'menu.inc';
-$title = "Login Page";
+
 // Check if there's an error message from the authentication process
 
 ?>
