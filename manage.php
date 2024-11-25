@@ -1,13 +1,18 @@
 <?php
 $title = "Search Applicants";
 include 'header.inc'; // Include the header
+include 'menu.inc'; // Include the menu
 include 'settings.php'; // Include the settings file
 session_start();
 if ($_SESSION['numberOfLogins'] != -1) {
   header("Location: signup.php?error=user_not_logged_in");
 }
 ?>
-<body>
+<body class="manage">
+  <br>
+  <br>
+  <br>
+  <br>
   <h1>Search Applicants</h1>
   <form id="search-apply-form" method="GET" action="">
     <fieldset>
