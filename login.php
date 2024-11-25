@@ -8,6 +8,7 @@ if ($_SESSION['numberOfLogins'] == -1) {
     header("Location: index.php");
   }
 ?>
+//Login form
 <body>
     <h2>Login</h2>
     <form action="processUsers.php" method="POST" class = "login" >

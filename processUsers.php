@@ -1,6 +1,6 @@
 <?php
 include 'settings.php';
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);//connect to db
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

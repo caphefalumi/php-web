@@ -7,6 +7,7 @@ if ($conn->connect_error) {
 function sanitize_input($data) {
     return htmlspecialchars(trim(stripslashes($data)));
 }
+// Sanitize and trim input data
 $userName = sanitize_input($_POST['userName']);
 $password = sanitize_input($_POST['password']);
 $hashedpassword = hash('sha256', $password);
@@ -29,7 +30,7 @@ if ($result->num_rows > 0) {
     header("Location: signup.php?error=username_taken");
     exit();
 }
-
+// Insert the new user into the database
 $_SESSION['numberOfLogins'] = 0;
 $conn->query("INSERT INTO users (userName, password) VALUES ('$userName', '$hashedpassword')");
 header("Location: login.php");

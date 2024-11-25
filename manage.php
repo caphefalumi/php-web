@@ -185,7 +185,7 @@ if ($_SESSION['numberOfLogins'] != -1) {
     </tr>
     <?php
 
-    // Sample logic for fetching and sorting data
+    // Fetching and sanitizing user input
     $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
     $sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'job_reference';
     $sort_direction = (isset($_GET['sort_direction']) && $_GET['sort_direction'] == 'DESC') ? 'DESC' : 'ASC';
@@ -232,7 +232,7 @@ if ($_SESSION['numberOfLogins'] != -1) {
       $sql = "SELECT * FROM eoi WHERE " . implode(" AND ", $search_conditions) . " ORDER BY $sort_column $sort_direction";
     }
     $result = $conn->query($sql);
-    
+    //Display records of EOI
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           echo "<tr>
@@ -258,6 +258,7 @@ if ($_SESSION['numberOfLogins'] != -1) {
     }
     ?>
 </table>
+//update form to update EOI and delete
 <form action="update.php" method="POST">
   <fieldset>
   <label for="delete_eoi">Job ID to delete:

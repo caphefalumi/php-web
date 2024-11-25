@@ -6,6 +6,7 @@ $eoi_to_delete = $_POST['delete_eoi'];
 $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 $updatesql = "UPDATE eoi SET status = '$status' WHERE EOInumber = '$eoi_num'";
 $delete_eoi = "DELETE FROM eoi WHERE job_reference='$eoi_to_delete'";
+//update status and delete eoi
 if (isset($eoi_to_delete)) {
   $conn->query($delete_eoi);
 }

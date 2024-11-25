@@ -14,8 +14,9 @@ if (isset($_GET['error'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Signup Page</title>
 </head>
+//Create signup form
 <body >
     <h2>Signup</h2>
     <form action="createUsers.php" method="POST" class="login">

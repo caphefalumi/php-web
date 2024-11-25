@@ -128,6 +128,7 @@ $query = "CREATE TABLE IF NOT EXISTS eoi (
     other_skills TEXT,
     status ENUM('New', 'Current', 'Final) NOT NULL
 )";
+//Prepare the query
 $conn->query($query);
 $stmt = $conn->prepare("INSERT INTO eoi (
     job_reference, first_name, last_name, DOB, gender, email, street_address, suburb, state, postcode, phone_number, skill1, skill2, other_skills, status
